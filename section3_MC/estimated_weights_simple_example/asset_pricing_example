@@ -1,0 +1,48 @@
+here is  a short script to  try a simple dividend- stock  price  example. Could you  make  another example file and adjust the code  to run this model?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% example file for composite likelihood with two univariate models: one for dividends  and the other  for  stock  returns
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% the model  is
+% d(t)= e(t)-theta* e(t-1) 0<theta<1
+% p(t)=(1-beta *theta) e_t - theta* e(t-1)    var(e(t))=sigma
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+clear all; close all; clc;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%options for simulating data
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+model=1; %=1:dividends  2: stock  prices
+
+%sample size
+T=100;
+
+%joint parameters
+sigma=1;
+theta=.5;
+
+% stock  price parameter
+bet=.95;
+
+ 
+if model==1
+    uu=randn(T,1)
+for t=1:T
+data_vec1(t)=sigma*uu(t,1)- theta*sigma*uu(t-1,1);
+end
+
+elseif model==2
+
+for t=1:T
+data_vec2(t)=(1-bet*theta)*sigma*uu(t,1)- theta*sigma*uu(t-1,1);
+end
+end
+ 
+data{1}=data_vec1;
+data{2}=data_vec2;
+
+
+save('data_sp.mat','data');
