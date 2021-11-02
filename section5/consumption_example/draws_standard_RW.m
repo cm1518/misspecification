@@ -80,7 +80,11 @@ elseif (length(setup.index_block{bb})<setup.length_param_vector) &&  bb==setup.n
 [post_prop, x_prop, add_matrix_prop3,log_post_prop]=posteriorwithstates(posterior_draw_prop,setup,data);
 end
 
+if isnan(post_prop) || isinf(post_prop)
 
+    post_prop=-inf;
+
+end
 
 
 if length(setup.index_block{bb})==setup.length_param_vector

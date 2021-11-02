@@ -7,12 +7,13 @@ close all;
 clc;
 
 
-
+rng(123)
 
 
 %set up the estimation
 
-setup_consumption_QE;
+load setup_file
+
 
 %and run the estimation
 
